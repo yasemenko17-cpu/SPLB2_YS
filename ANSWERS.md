@@ -17,3 +17,11 @@
 
 - **Альтернатива:** Читання всього файла в оперативну пам'ять (наприклад, через звичайний метод `read()`) або лінійний пошук (`O(n)`).
 - **Наш підхід (`mmap` + двійковий пошук):** Пошук виконується за логарифмічну кількість кроків — орієнтовно $\log_2(N)$ звернень до пам'яті[cite: 11]. Наприклад, для файлу зі 100 000 записів алгоритм робить **не більше 18 ітерацій**[cite: 11], зчитуючи точкові 8-байтові блоки напряму з операційної системи через `mmap` без завантаження всього файлу в оперативну пам'ять Python. Це мінімізує споживання RAM та забезпечує максимальну швидкість виконання.
+
+5 рядків з trace.txt
+
+1366  mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fdca8bea000
+1366  openat(AT_FDCWD, "/usr/local/bin/../lib/glibc-hwcaps/x86-64-v4/libpython3.12.so.1.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+1366  openat(AT_FDCWD, "/usr/local/bin/../lib/glibc-hwcaps/x86-64-v3/libpython3.12.so.1.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+1366  openat(AT_FDCWD, "/usr/local/bin/../lib/glibc-hwcaps/x86-64-v2/libpython3.12.so.1.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+1366  openat(AT_FDCWD, "/usr/local/bin/../lib/libpython3.12.so.1.0", O_RDONLY|O_CLOEXEC) = 3
